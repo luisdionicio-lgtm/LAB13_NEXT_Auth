@@ -26,7 +26,7 @@ export default function AuthForm({ google, github }: { google: boolean; github: 
     } catch { setError("No se pudo conectar. Inténtalo nuevamente."); }
     finally { setBusy(false); }
   }
-  return <div className="space-y-4">
+  return <div className="auth-form space-y-4">
     <div className="grid gap-2"><button disabled={!google || busy} onClick={() => signIn("google", { callbackUrl: "/dashboard" })} className="w-full rounded border border-gray-300 px-4 py-3 flex justify-center items-center gap-3 disabled:opacity-40"><FaGoogle /> Continuar con Google</button><button disabled={!github || busy} onClick={() => signIn("github", { callbackUrl: "/dashboard" })} className="w-full rounded border border-gray-300 px-4 py-3 flex justify-center items-center gap-3 disabled:opacity-40"><FaGithub /> Continuar con GitHub</button></div>
     <p className="text-center text-xs text-gray-500">O USA TU CORREO</p>
     <form onSubmit={submit} className="space-y-3">{register && <label className="block text-sm">Nombre<input required minLength={2} maxLength={80} name="name" autoComplete="name" className="mt-1 w-full rounded border border-gray-300 p-3" /></label>}

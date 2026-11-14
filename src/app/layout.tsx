@@ -7,7 +7,7 @@ import LogoutButton from "@/components/LogoutButton";
 import Provider from "@/components/SessionProvider";
 import "./globals.css";
 
-export const metadata: Metadata = { title: "Next Auth App", description: "Laboratorio 13: autenticación con Google y NextAuth.js" };
+export const metadata: Metadata = { title: "El Refugio | The Walking Dead", description: "Laboratorio 13: autenticación con Google y NextAuth.js" };
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const session = await getServerSession(authOptions);
@@ -17,7 +17,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         <Provider session={session}>
           <nav className="bg-black text-white shadow-sm">
             <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-4">
-              <Link href="/" className="text-xl font-semibold">MyAuthApp</Link>
+              <Link href="/" className="text-xl font-semibold">THE WALKING DEAD <span className="nav-small">/ EL REFUGIO</span></Link>
               <ul className="flex flex-wrap items-center gap-6 text-sm">
                 <li><Link href="/dashboard" className="hover:text-gray-400">Dashboard</Link></li>
                 {session?.user && <>
