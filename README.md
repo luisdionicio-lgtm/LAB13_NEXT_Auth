@@ -1,39 +1,34 @@
-# Laboratorio 13 — NextAuth con Google OAuth
+# El Refugio — Laboratorio 13
 
-Implementación del procedimiento previo a la sección TAREA de GLAB-S13-EAREVALO-2026-1.
+Aplicación académica de autenticación con Next.js y NextAuth.js, inspirada en The Walking Dead.
 
-## Iniciar
+- Aplicación: https://lab-13-next-auth.vercel.app
+- Repositorio: https://github.com/luisdionicio-lgtm/LAB13_NEXT_Auth
 
-1. Abre `.env.local` y completa `GOOGLE_CLIENT_ID` y `GOOGLE_CLIENT_SECRET`. `NEXTAUTH_SECRET` ya contiene el valor proporcionado por el usuario.
-2. En Google Cloud configura origen `http://localhost:3000` y redirección `http://localhost:3000/api/auth/callback/google`.
-3. Ejecuta `npm install` si es la primera vez y luego `npm run dev`.
-4. Abre http://localhost:3000. Si cambias `.env.local` con el servidor abierto, reinícialo.
+## Funcionalidades
 
-El botón de Google se habilita cuando las dos credenciales están configuradas. Si la aplicación OAuth está en modo de prueba, incluye tu cuenta en los usuarios de prueba de Google Cloud.
+- Inicio de sesión con Google, GitHub o correo y contraseña mediante CredentialsProvider.
+- Registro con validación en el servidor y contraseñas almacenadas como hashes bcrypt con costo 12.
+- Bloqueo de 15 minutos después de 5 intentos fallidos, persistido en la base de datos.
+- Sesiones JWT, cierre de sesión y rutas `/dashboard` y `/profile` protegidas.
+- SQLite local para desarrollo y Turso en producción; también admite PostgreSQL mediante `DATABASE_URL`.
+- Diseño adaptable con imágenes promocionales acreditadas en `public/images/CREDITOS.md`.
 
-## Procedimiento implementado
+## Inicio local
 
-- Next.js con TypeScript, ESLint, Tailwind CSS, App Router y Turbopack.
-- NextAuth.js v4 y react-icons, proveedor Google, sesión JWT.
-- Handler `src/app/api/auth/[...nextauth]/route.ts`.
-- Componentes `LogoutButton` y `SessionProvider`.
-- Navegación con perfil, foto y cierre de sesión; inicio redirigido a `/dashboard`.
-- Páginas `/signIn`, `/dashboard` y `/profile`.
-- Middleware para dashboard y perfil, más validación de sesión en el servidor.
-- Imágenes de perfil de Google permitidas en `next.config.ts`.
+Usa Node.js compatible con Next.js 16. Ejecuta `npm install` y completa `.env.local` siguiendo `.env.example`. Nunca compartas ni publiques las claves. Después ejecuta `npm run dev` y visita http://localhost:3000.
 
-Las opciones compartidas se guardan en `src/lib/auth.ts`, para que el handler solo exporte los métodos admitidos por Next.js. Los archivos con JSX usan `.tsx`. Se utiliza la redirección normal de OAuth con `signIn`, ya que `redirect: false` no es el flujo soportado para Google.
+Google requiere autorizar `http://localhost:3000/api/auth/callback/google`. El cliente de GitHub de producción está configurado para `https://lab-13-next-auth.vercel.app/api/auth/callback/github`; para probar GitHub localmente añade `http://localhost:3000/api/auth/callback/github` en los URI de la aplicación OAuth, o crea otro cliente para desarrollo. Reinicia el servidor tras cambiar `.env.local`.
 
-## Verificación y capturas
+## Configuración de producción
 
-- Sin sesión, `/dashboard` y `/profile` deben redirigir a `/signIn`.
-- Después de pegar las claves: iniciar sesión con Google, comprobar nombre en Dashboard y nombre/correo/foto en Profile.
-- Cerrar sesión y confirmar que las rutas vuelven a estar protegidas.
-- Capturar Sign In, Dashboard y Profile con la sesión real. El flujo completo se verificó con la cuenta real el 14 de noviembre de 2026. Las capturas se guardaron en la carpeta hermana `capturas-laboratorio`.
+Vercel necesita `NEXTAUTH_URL`, `NEXTAUTH_SECRET`, `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `GITHUB_ID`, `GITHUB_SECRET`, `TURSO_DATABASE_URL` y `TURSO_AUTH_TOKEN`. La base de datos Turso debe ser persistente. Cada proveedor debe tener el URI de retorno de producción autorizado. Un cambio de variables requiere volver a desplegar. Si Google está en modo de prueba, la cuenta debe estar en la lista de usuarios de prueba.
 
-Comandos: `npm run lint`, `npx tsc --noEmit`, `npm run build`.
+## Comprobaciones
 
-No se incluye la sección TAREA: credenciales de usuario/contraseña, registro, bloqueo de intentos, bcrypt, GitHub, publicación ni conclusiones.
-No subas `.env.local` al repositorio; está excluido por `.gitignore`.
+- `npm run lint` y `npm run build`.
+- Registrar una cuenta, cerrar sesión e iniciar con correo y contraseña.
+- Verificar que después de cinco contraseñas incorrectas la cuenta permanezca bloqueada durante 15 minutos.
+- Iniciar con Google y GitHub, visitar perfil, cerrar sesión e intentar entrar a las rutas protegidas.
 
-Referencias: https://next-auth.js.org/providers/google y https://next-auth.js.org/configuration/nextjs.
+La limitación de intentos es por correo, no sustituye una protección por IP o CAPTCHA. El registro no verifica la propiedad del correo y no incluye recuperación de contraseña: esta implementación es para el laboratorio, no para almacenar cuentas sensibles en un servicio público.
