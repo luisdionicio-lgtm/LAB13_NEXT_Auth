@@ -5,3 +5,7 @@ Imágenes promocionales de The Walking Dead, © AMC y sus respectivos titulares.
 - survivors.jpg: https://www.allocine.fr/series/ficheserie-7330/photos/detail/?cmediafile=20205404 — https://fr.web.img6.acsta.net/medias/nmedia/18/78/35/82/20205404.jpg
 - rick-michonne.jpg: https://walkingdeadbr.com/gale-anne-hurd-the-walking-dead-rick-e-michonne/
 - daryl.jpg: https://sinetopya.com/post/the-walking-dead-daryl-dixon-4-sezonuyla-final-yapacak/
+
+- final-season.jpg: https://www.amc.com/blogs/what-s-happened-so-far-in-twd-season-11--1059392 (imagen promocional AMC).
+- atlanta.jpg: https://www.culturaocio.com/tv/noticia-the-walking-dead-todas-versiones-carretera-atlanta-20141123111344.html
+- prison.jpg: https://serial.everyeye.it/articoli/speciale-the-walking-dead-storia-finora-dov-eravamo-rimasti-54137.html
