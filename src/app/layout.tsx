@@ -16,9 +16,9 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
       <body className="antialiased">
         <Provider session={session}>
           <nav className="bg-black text-white shadow-sm">
-            <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-4">
+            <div className="site-nav mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-4">
               <Link href="/" className="text-xl font-semibold">THE WALKING DEAD <span className="nav-small">/ EL REFUGIO</span></Link>
-              <ul className="flex flex-wrap items-center gap-6 text-sm">
+              <ul className="site-nav-links flex flex-wrap items-center gap-6 text-sm">
                 <li><Link href="/dashboard" className="hover:text-gray-400">Dashboard</Link></li>
                 {session?.user && <>
                   <li><Link href="/profile" className="hover:text-gray-400">Profile</Link></li>
